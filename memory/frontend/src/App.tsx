@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { WalletConnection } from './components/WalletConnection';
 import { MemoryUpload } from './components/MemoryUpload';
 import { FamilyManagement } from './components/FamilyManagement';
+import { Statistics } from './components/Statistics';
 
 function App() {
   const [userAddress, setUserAddress] = useState<string | null>(null);
@@ -35,15 +36,17 @@ function App() {
           <FamilyManagement userAddress={userAddress} />
         </div>
 
+        <Statistics userAddress={userAddress} />
+
         <div className="card">
-          <h3>Development Status</h3>
-          <ul>
-            <li>✅ Smart contracts deployed and working</li>
-            <li>✅ Frontend with wallet connection</li>
-            <li>✅ Memory upload functionality</li>
-            <li>✅ Family management interface</li>
-            <li>🔄 Tutorial and documentation</li>
-          </ul>
+          <h3>Development Journey</h3>
+          <p>This development sprint demonstrates the core concept of MemoryChain. The smart contracts handle memory storage with family permissions, while the React frontend provides an intuitive interface for users.</p>
+          <div style={{marginTop: '16px'}}>
+            <span style={{color: '#28a745'}}>✓ Smart contracts working</span> |{' '}
+            <span style={{color: '#28a745'}}>✓ Frontend integration</span> |{' '}
+            <span style={{color: '#28a745'}}>✓ Family management</span> |{' '}
+            <span style={{color: '#ffc107'}}>⟳ Tutorial published</span>
+          </div>
         </div>
       </main>
     </div>
