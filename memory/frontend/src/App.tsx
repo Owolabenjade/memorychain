@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { WalletConnection } from './components/WalletConnection';
 import { MemoryUpload } from './components/MemoryUpload';
+import { FamilyManagement } from './components/FamilyManagement';
 
 function App() {
   const [userAddress, setUserAddress] = useState<string | null>(null);
@@ -29,15 +30,19 @@ function App() {
           </p>
         </div>
 
-        <MemoryUpload userAddress={userAddress} />
+        <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px'}}>
+          <MemoryUpload userAddress={userAddress} />
+          <FamilyManagement userAddress={userAddress} />
+        </div>
 
         <div className="card">
           <h3>Development Status</h3>
           <ul>
             <li>✅ Smart contracts deployed and working</li>
-            <li>✅ Basic frontend with wallet connection</li>
-            <li>🔄 Memory upload functionality</li>
-            <li>📝 Family management (coming next)</li>
+            <li>✅ Frontend with wallet connection</li>
+            <li>✅ Memory upload functionality</li>
+            <li>✅ Family management interface</li>
+            <li>🔄 Tutorial and documentation</li>
           </ul>
         </div>
       </main>
