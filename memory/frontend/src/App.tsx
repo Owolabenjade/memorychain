@@ -4,6 +4,7 @@ import { MemoryUpload } from './components/MemoryUpload';
 import { FamilyManagement } from './components/FamilyManagement';
 import { MemoryGallery } from './components/MemoryGallery';
 import { FamilyInvitations } from './components/FamilyInvitations';
+import { PermissionManager } from './components/PermissionManager';
 import { Statistics } from './components/Statistics';
 import { ContractStatus } from './components/ContractStatus';
 
@@ -18,7 +19,7 @@ function App() {
   const tabs = [
     { id: 'memories', label: 'Memories' },
     { id: 'families', label: 'Families' },
-    { id: 'invitations', label: 'Invitations' },
+    { id: 'permissions', label: 'Permissions' },
     { id: 'status', label: 'Status' }
   ];
 
@@ -40,6 +41,9 @@ function App() {
             Store, encrypt, and inherit your most precious memories across generations,
             secured by Bitcoin's immutability through Stacks.
           </p>
+          <div style={{marginTop: '16px', padding: '12px', background: '#e3f2fd', borderRadius: '4px'}}>
+            <strong>Level 2 Enhanced MVP:</strong> Complete family memory management with advanced permissions and analytics
+          </div>
         </div>
 
         {/* Tab Navigation */}
@@ -86,8 +90,8 @@ function App() {
           </div>
         )}
 
-        {activeTab === 'invitations' && (
-          <FamilyInvitations userAddress={userAddress} />
+        {activeTab === 'permissions' && (
+          <PermissionManager userAddress={userAddress} />
         )}
 
         {activeTab === 'status' && (
