@@ -2,15 +2,25 @@ import React, { useState } from 'react';
 import { WalletConnection } from './components/WalletConnection';
 import { MemoryUpload } from './components/MemoryUpload';
 import { FamilyManagement } from './components/FamilyManagement';
+import { MemoryGallery } from './components/MemoryGallery';
+import { FamilyInvitations } from './components/FamilyInvitations';
 import { Statistics } from './components/Statistics';
 import { ContractStatus } from './components/ContractStatus';
 
 function App() {
   const [userAddress, setUserAddress] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState('memories');
 
   const handleWalletConnect = (address: string) => {
     setUserAddress(address);
   };
+
+  const tabs = [
+    { id: 'memories', label: 'Memories' },
+    { id: 'families', label: 'Families' },
+    { id: 'invitations', label: 'Invitations' },
+    { id: 'status', label: 'Status' }
+  ];
 
   return (
     <div>
@@ -30,30 +40,62 @@ function App() {
             Store, encrypt, and inherit your most precious memories across generations,
             secured by Bitcoin's immutability through Stacks.
           </p>
-          <div style={{marginTop: '16px', padding: '12px', background: '#e3f2fd', borderRadius: '4px'}}>
-            <strong>Level 2 MVP Status:</strong> Core functionality complete. Ready for Level 3 expansion.
+        </div>
+
+        {/* Tab Navigation */}
+        <div style={{marginBottom: '20px'}}>
+          <div style={{
+            display: 'flex',
+            borderBottom: '2px solid #eee',
+            gap: '0'
+          }}>
+            {tabs.map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                style={{
+                  padding: '12px 24px',
+                  border: 'none',
+                  background: activeTab === tab.id ? '#007bff' : 'transparent',
+                  color: activeTab === tab.id ? 'white' : '#666',
+                  cursor: 'pointer',
+                  borderRadius: '0'
+                }}
+              >
+                {tab.label}
+              </button>
+            ))}
           </div>
         </div>
 
-        <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px'}}>
-          <MemoryUpload userAddress={userAddress} />
-          <FamilyManagement userAddress={userAddress} />
-        </div>
+        {/* Tab Content */}
+        {activeTab === 'memories' && (
+          <div>
+            <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px'}}>
+              <MemoryUpload userAddress={userAddress} />
+              <FamilyManagement userAddress={userAddress} />
+            </div>
+            <MemoryGallery userAddress={userAddress} />
+          </div>
+        )}
 
-        <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px'}}>
-          <Statistics userAddress={userAddress} />
-          <ContractStatus />
-        </div>
+        {activeTab === 'families' && (
+          <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px'}}>
+            <FamilyManagement userAddress={userAddress} />
+            <FamilyInvitations userAddress={userAddress} />
+          </div>
+        )}
 
-        <div className="card">
-          <h3>Development Summary</h3>
-          <p>
-            Development going smoothly.
-          </p>
-          <p style={{marginTop: '12px', fontSize: '14px', color: '#666'}}>
-            Next phase will add IPFS integration, client-side encryption, and testnet deployment.
-          </p>
-        </div>
+        {activeTab === 'invitations' && (
+          <FamilyInvitations userAddress={userAddress} />
+        )}
+
+        {activeTab === 'status' && (
+          <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px'}}>
+            <Statistics userAddress={userAddress} />
+            <ContractStatus />
+          </div>
+        )}
       </main>
     </div>
   );
