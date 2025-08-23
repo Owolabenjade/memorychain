@@ -3,6 +3,7 @@ import { WalletConnection } from './components/WalletConnection';
 import { MemoryUpload } from './components/MemoryUpload';
 import { FamilyManagement } from './components/FamilyManagement';
 import { Statistics } from './components/Statistics';
+import { ContractStatus } from './components/ContractStatus';
 
 function App() {
   const [userAddress, setUserAddress] = useState<string | null>(null);
@@ -29,6 +30,9 @@ function App() {
             Store, encrypt, and inherit your most precious memories across generations,
             secured by Bitcoin's immutability through Stacks.
           </p>
+          <div style={{marginTop: '16px', padding: '12px', background: '#e3f2fd', borderRadius: '4px'}}>
+            <strong>Level 2 MVP Status:</strong> Core functionality complete. Ready for Level 3 expansion.
+          </div>
         </div>
 
         <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px'}}>
@@ -36,17 +40,19 @@ function App() {
           <FamilyManagement userAddress={userAddress} />
         </div>
 
-        <Statistics userAddress={userAddress} />
+        <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px'}}>
+          <Statistics userAddress={userAddress} />
+          <ContractStatus />
+        </div>
 
         <div className="card">
-          <h3>Development Journey</h3>
-          <p>This development sprint demonstrates the core concept of MemoryChain. The smart contracts handle memory storage with family permissions, while the React frontend provides an intuitive interface for users.</p>
-          <div style={{marginTop: '16px'}}>
-            <span style={{color: '#28a745'}}>✓ Smart contracts working</span> |{' '}
-            <span style={{color: '#28a745'}}>✓ Frontend integration</span> |{' '}
-            <span style={{color: '#28a745'}}>✓ Family management</span> |{' '}
-            <span style={{color: '#ffc107'}}>⟳ Tutorial published</span>
-          </div>
+          <h3>Development Summary</h3>
+          <p>
+            Development going smoothly.
+          </p>
+          <p style={{marginTop: '12px', fontSize: '14px', color: '#666'}}>
+            Next phase will add IPFS integration, client-side encryption, and testnet deployment.
+          </p>
         </div>
       </main>
     </div>
