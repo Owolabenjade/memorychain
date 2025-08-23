@@ -5,6 +5,7 @@ import { FamilyManagement } from './components/FamilyManagement';
 import { MemoryGallery } from './components/MemoryGallery';
 import { FamilyInvitations } from './components/FamilyInvitations';
 import { PermissionManager } from './components/PermissionManager';
+import { AnalyticsDashboard } from './components/AnalyticsDashboard';
 import { Statistics } from './components/Statistics';
 import { ContractStatus } from './components/ContractStatus';
 
@@ -20,6 +21,7 @@ function App() {
     { id: 'memories', label: 'Memories' },
     { id: 'families', label: 'Families' },
     { id: 'permissions', label: 'Permissions' },
+    { id: 'analytics', label: 'Analytics' },
     { id: 'status', label: 'Status' }
   ];
 
@@ -42,7 +44,7 @@ function App() {
             secured by Bitcoin's immutability through Stacks.
           </p>
           <div style={{marginTop: '16px', padding: '12px', background: '#e3f2fd', borderRadius: '4px'}}>
-            <strong>Level 2 Enhanced MVP:</strong> Complete family memory management with advanced permissions and analytics
+            <strong>Level 2 Complete MVP:</strong> Production-ready features with analytics and advanced permissions
           </div>
         </div>
 
@@ -51,7 +53,8 @@ function App() {
           <div style={{
             display: 'flex',
             borderBottom: '2px solid #eee',
-            gap: '0'
+            gap: '0',
+            overflowX: 'auto'
           }}>
             {tabs.map(tab => (
               <button
@@ -63,7 +66,8 @@ function App() {
                   background: activeTab === tab.id ? '#007bff' : 'transparent',
                   color: activeTab === tab.id ? 'white' : '#666',
                   cursor: 'pointer',
-                  borderRadius: '0'
+                  borderRadius: '0',
+                  whiteSpace: 'nowrap'
                 }}
               >
                 {tab.label}
@@ -92,6 +96,10 @@ function App() {
 
         {activeTab === 'permissions' && (
           <PermissionManager userAddress={userAddress} />
+        )}
+
+        {activeTab === 'analytics' && (
+          <AnalyticsDashboard />
         )}
 
         {activeTab === 'status' && (
